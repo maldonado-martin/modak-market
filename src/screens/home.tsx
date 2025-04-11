@@ -1,6 +1,7 @@
 import { Text } from "@react-navigation/elements";
+import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
-import { FlatList, View } from "react-native";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 import { useGetAllProducts } from "@/api/queries";
@@ -13,6 +14,7 @@ import {
 } from "@/constants/layout";
 
 export default function Home() {
+  const navigation = useNavigation();
   const query = useGetAllProducts();
 
   return (
@@ -21,7 +23,10 @@ export default function Home() {
       data={query.data?.products}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
-        <View style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => navigation.navigate("Detail", { id: item.id })}
+        >
           <Image
             source={{ uri: item.thumbnail }}
             style={{ height: THUMBNAIL_SIZE, width: THUMBNAIL_SIZE }}
@@ -31,7 +36,7 @@ export default function Home() {
             <Text style={styles.price}>${item.price}</Text>
           </View>
           <Icon name="chevron-right" />
-        </View>
+        </TouchableOpacity>
       )}
     />
   );
