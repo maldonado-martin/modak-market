@@ -1,5 +1,8 @@
 import { createStaticNavigation } from "@react-navigation/native";
+import { withUnistyles } from "react-native-unistyles";
 
 import Root from "./root";
 
-export default createStaticNavigation(Root);
+export default withUnistyles(createStaticNavigation(Root), (theme) => ({
+  theme,
+}));

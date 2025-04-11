@@ -5,5 +5,6 @@ module.exports = {
     "prettier/prettier": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "@typescript-eslint/no-empty-object-type": "off",
   },
 };
