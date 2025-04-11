@@ -50,3 +50,9 @@ export type Meta = {
   barcode: string;
   qrCode: string;
 };
+
+export type Category = {
+  slug: string;
+  name: string;
+  url: string;
+};
