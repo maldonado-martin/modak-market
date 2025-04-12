@@ -1,5 +1,6 @@
 import "@/unistyles";
 
+import ErrorBoundary from "@/components/error-boundary";
 import QueryProvider from "@/components/query-provider";
 import useFocusManager from "@/hooks/use-focus-manager";
 import useOnlineManager from "@/hooks/use-online-manager";
@@ -10,8 +11,10 @@ export default function App() {
   useOnlineManager();
 
   return (
-    <QueryProvider>
-      <Navigation />
-    </QueryProvider>
+    <ErrorBoundary>
+      <QueryProvider>
+        <Navigation />
+      </QueryProvider>
+    </ErrorBoundary>
   );
 }

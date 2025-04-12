@@ -1,5 +1,4 @@
-import { Button, Text } from "@react-navigation/elements";
-import { useNavigation } from "@react-navigation/native";
+import { Text } from "@react-navigation/elements";
 import Color from "color";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
@@ -34,7 +33,6 @@ const SORT_BY = [
 export default function Filter() {
   const query = useGetAllCategories();
   const { selectedCategory, sortBy, order } = useParamsStore();
-  const navigation = useNavigation();
 
   if (query.isPending) return <Loading />;
 
@@ -110,7 +108,6 @@ export default function Filter() {
           })}
         </View>
       </View>
-      <Button onPress={() => navigation.goBack()}>Done</Button>
     </ScrollView>
   );
 }
@@ -142,8 +139,6 @@ const styles = StyleSheet.create((theme) => ({
     backgroundColor: isSelected
       ? Color(theme.colors.primary).alpha(0.1).toString()
       : theme.colors.card,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.colors.border,
   }),
   text: (isSelected: boolean) => ({
     fontSize: 16,
