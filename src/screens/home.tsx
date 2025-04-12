@@ -5,7 +5,9 @@ import { FlatList, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 import { useGetAllProducts } from "@/api/queries";
+import Error from "@/components/error";
 import Icon from "@/components/icon";
+import Loading from "@/components/loading";
 import {
   BORDER_RADIUS,
   GAP,
@@ -16,6 +18,10 @@ import {
 export default function Home() {
   const navigation = useNavigation();
   const query = useGetAllProducts();
+
+  if (query.isPending) return <Loading />;
+
+  if (query.isError) return <Error retry={query.refetch} />;
 
   return (
     <FlatList

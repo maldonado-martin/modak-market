@@ -6,6 +6,8 @@ import { ScrollView, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 import { useGetProductById } from "@/api/queries";
+import Error from "@/components/error";
+import Loading from "@/components/loading";
 import { GAP, SCREEN_PADDING } from "@/constants/layout";
 
 type Props = StaticScreenProps<{
@@ -16,13 +18,16 @@ export default function Detail(props: Props) {
   const { id } = props.route.params;
   const query = useGetProductById(id);
 
-  if (query.isPending || query.isError) return null;
+  if (query.isPending) return <Loading />;
+
+  if (query.isError) return <Error retry={query.refetch} />;
+
   const { title, brand, description, images, stock, price } = query.data;
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.brand}>{brand}</Text>
+      {!!brand && <Text style={styles.brand}>{brand}</Text>}
       <Image
         source={{ uri: images[0] }}
         style={styles.image}
