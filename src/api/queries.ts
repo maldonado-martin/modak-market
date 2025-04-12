@@ -1,5 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
+import { ProductKey, SortOrder } from "@/types/api";
+
 import {
   getAllCategories,
   getAllProducts,
@@ -8,10 +10,10 @@ import {
   getProductById,
 } from "./endpoints";
 
-export function useGetAllProducts() {
+export function useGetAllProducts(sortBy?: ProductKey, order?: SortOrder) {
   return useInfiniteQuery({
-    queryKey: ["products"],
-    queryFn: ({ pageParam }) => getAllProducts(pageParam),
+    queryKey: ["products", { sortBy, order }],
+    queryFn: ({ pageParam }) => getAllProducts(pageParam, sortBy, order),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (lastPage.skip === lastPage.total) return null;
@@ -20,10 +22,15 @@ export function useGetAllProducts() {
   });
 }
 
-export function useGetAllProductsByCategory(category: string) {
+export function useGetAllProductsByCategory(
+  category: string,
+  sortBy?: ProductKey,
+  order?: SortOrder,
+) {
   return useInfiniteQuery({
-    queryKey: ["products", { category }],
-    queryFn: ({ pageParam }) => getAllProductsByCategory(category, pageParam),
+    queryKey: ["products", { category, sortBy, order }],
+    queryFn: ({ pageParam }) =>
+      getAllProductsByCategory(category, pageParam, sortBy, order),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (lastPage.skip === lastPage.total) return null;
@@ -32,10 +39,15 @@ export function useGetAllProductsByCategory(category: string) {
   });
 }
 
-export function useGetAllProductsBySearch(search: string) {
+export function useGetAllProductsBySearch(
+  search: string,
+  sortBy?: ProductKey,
+  order?: SortOrder,
+) {
   return useInfiniteQuery({
-    queryKey: ["products", { search }],
-    queryFn: ({ pageParam }) => getAllProductsBySearch(search, pageParam),
+    queryKey: ["products", { search, sortBy, order }],
+    queryFn: ({ pageParam }) =>
+      getAllProductsBySearch(search, pageParam, sortBy, order),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (lastPage.skip === lastPage.total) return null;

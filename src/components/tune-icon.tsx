@@ -7,14 +7,15 @@ import Icon from "./icon";
 
 export default function TuneIcon() {
   const navigation = useNavigation();
-  const { selectedCategory } = useParamsStore();
+  const { selectedCategory, sortBy } = useParamsStore();
+  const isActive = selectedCategory || sortBy;
 
   return (
     <HeaderButton onPress={() => navigation.navigate("Filter")}>
       <Icon
         name="tune"
         uniProps={(theme) => ({
-          color: selectedCategory ? theme.colors.primary : theme.colors.text,
+          color: isActive ? theme.colors.primary : theme.colors.text,
         })}
       />
     </HeaderButton>

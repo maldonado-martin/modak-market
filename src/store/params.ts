@@ -1,21 +1,19 @@
 import { create } from "zustand";
 
-import { Product } from "@/types/api";
-
-type Key = keyof Product;
+import { ProductKey, SortOrder } from "@/types/api";
 
 type State = {
   searchQuery: string;
   selectedCategory: string;
-  sortBy: Key;
-  order: "asc" | "desc";
+  sortBy?: ProductKey;
+  order?: SortOrder;
 };
 
 const useParamsStore = create<State>(() => ({
   searchQuery: "",
   selectedCategory: "",
-  sortBy: "title",
-  order: "desc",
+  sortBy: undefined,
+  order: undefined,
 }));
 
 export default useParamsStore;

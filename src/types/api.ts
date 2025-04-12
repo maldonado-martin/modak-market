@@ -56,3 +56,7 @@ export type Category = {
   name: string;
   url: string;
 };
+
+export type ProductKey = keyof Product;
+
+export type SortOrder = "asc" | "desc";

@@ -6,10 +6,10 @@ import {
 import useParamsStore from "@/store/params";
 
 export default function useDataSource() {
-  const { searchQuery, selectedCategory } = useParamsStore();
-  const all = useGetAllProducts();
-  const category = useGetAllProductsByCategory(selectedCategory);
-  const search = useGetAllProductsBySearch(searchQuery);
+  const { searchQuery, selectedCategory, sortBy, order } = useParamsStore();
+  const all = useGetAllProducts(sortBy, order);
+  const category = useGetAllProductsByCategory(selectedCategory, sortBy, order);
+  const search = useGetAllProductsBySearch(searchQuery, sortBy, order);
 
   if (searchQuery) {
     return search;
