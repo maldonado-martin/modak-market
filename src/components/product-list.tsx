@@ -1,8 +1,8 @@
 import { FlatList } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
-import { useGetAllProducts } from "@/api/queries";
 import { SCREEN_PADDING } from "@/constants/layout";
+import useDataSource from "@/hooks/use-data-source";
 
 import Error from "./error";
 import Loading from "./loading";
@@ -10,7 +10,7 @@ import ProductItem from "./product-item";
 import Spinner from "./spinner";
 
 export default function ProductList() {
-  const query = useGetAllProducts();
+  const query = useDataSource();
 
   if (query.isPending) return <Loading />;
 

@@ -1,16 +1,16 @@
-import { useState } from "react";
 import { TextInput, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 import { GAP, SCREEN_PADDING } from "@/constants/layout";
+import useParamsStore from "@/store/params";
 
 import Icon from "./icon";
 
 export default function Search() {
-  const [value, setValue] = useState("");
+  const { searchQuery } = useParamsStore();
 
-  const handleClear = () => {
-    setValue("");
+  const setSearchQuery = (value: string) => {
+    useParamsStore.setState({ searchQuery: value });
   };
 
   return (
@@ -21,11 +21,11 @@ export default function Search() {
           style={styles.input}
           placeholder="Search products"
           placeholderTextColor="#666"
-          value={value}
-          onChangeText={setValue}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
         />
-        {value && (
-          <TouchableOpacity onPress={handleClear}>
+        {searchQuery && (
+          <TouchableOpacity onPress={() => setSearchQuery("")}>
             <Icon name="close" />
           </TouchableOpacity>
         )}
