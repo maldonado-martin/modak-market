@@ -36,6 +36,7 @@ export function useGetAllProductsByCategory(
       if (lastPage.skip === lastPage.total) return null;
       return lastPage.skip + lastPage.limit;
     },
+    enabled: !!category,
   });
 }
 
@@ -53,6 +54,7 @@ export function useGetAllProductsBySearch(
       if (lastPage.skip === lastPage.total) return null;
       return lastPage.skip + lastPage.limit;
     },
+    enabled: !!search,
   });
 }
 

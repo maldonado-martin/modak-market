@@ -17,6 +17,7 @@
     "axios": "^1.8.4",
     "expo": "~52.0.43",
     "expo-image": "~2.0.7",
+    "expo-linking": "~7.0.5",
     "expo-network": "~7.0.5",
     "expo-system-ui": "~4.0.9",
     "react": "18.3.1",

@@ -19,6 +19,9 @@ export default createNativeStackNavigator({
       options: {
         headerTitle: "",
       },
+      linking: {
+        path: "product/:id",
+      },
     },
     Filter: {
       screen: Filter,

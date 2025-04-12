@@ -1,5 +1,7 @@
 import "@/unistyles";
 
+import * as Linking from "expo-linking";
+
 import ErrorBoundary from "@/components/error-boundary";
 import QueryProvider from "@/components/query-provider";
 import useFocusManager from "@/hooks/use-focus-manager";
@@ -13,7 +15,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <QueryProvider>
-        <Navigation />
+        <Navigation linking={{ prefixes: [Linking.createURL("/")] }} />
       </QueryProvider>
     </ErrorBoundary>
   );
