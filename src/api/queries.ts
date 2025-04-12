@@ -1,11 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 import { getAllCategories, getAllProducts, getProductById } from "./endpoints";
 
 export function useGetAllProducts() {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["products"],
-    queryFn: getAllProducts,
+    queryFn: ({ pageParam }) => getAllProducts(pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.skip === lastPage.total) return null;
+      return lastPage.skip + lastPage.limit;
+    },
   });
 }
 

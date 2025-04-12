@@ -1,30 +1,39 @@
-import { useCallback } from "react";
-import { FlatList, ListRenderItem } from "react-native";
+import { FlatList } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
+import { useGetAllProducts } from "@/api/queries";
 import { SCREEN_PADDING } from "@/constants/layout";
-import { Product } from "@/types/api";
 
+import Error from "./error";
+import Loading from "./loading";
 import ProductItem from "./product-item";
+import Spinner from "./spinner";
 
-type Props = {
-  data: Product[];
-};
+export default function ProductList() {
+  const query = useGetAllProducts();
 
-export default function ProductList(props: Props) {
-  const { data } = props;
+  if (query.isPending) return <Loading />;
 
-  const renderItem: ListRenderItem<Product> = useCallback(
-    ({ item }) => <ProductItem {...item} />,
-    [],
-  );
+  if (query.isError) return <Error retry={query.refetch} />;
+
+  const data = query.data?.pages.flatMap((page) => page.products) ?? [];
 
   return (
     <FlatList
       contentContainerStyle={styles.root}
       data={data}
       keyExtractor={(item) => item.id.toString()}
-      renderItem={renderItem}
+      renderItem={({ item }) => <ProductItem {...item} />}
+      onEndReached={() => {
+        if (query.hasNextPage) {
+          query.fetchNextPage();
+        }
+      }}
+      ListFooterComponent={() => {
+        if (!query.isFetchingNextPage) return null;
+        if (!query.hasNextPage) return null;
+        return <Spinner />;
+      }}
     />
   );
 }

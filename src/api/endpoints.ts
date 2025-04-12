@@ -2,8 +2,8 @@ import { AllProducts, Category, Product } from "@/types/api";
 
 import { api } from "./config";
 
-export async function getAllProducts(): Promise<AllProducts> {
-  const { data } = await api.get<AllProducts>("/products");
+export async function getAllProducts(skip: number): Promise<AllProducts> {
+  const { data } = await api.get<AllProducts>(`/products?skip=${skip}`);
   return data;
 }
 
