@@ -11,6 +11,7 @@ export default createNativeStackNavigator({
       screen: Home,
       options: {
         headerRight: TuneIcon,
+        title: "Modak Market",
       },
     },
     Detail: {
