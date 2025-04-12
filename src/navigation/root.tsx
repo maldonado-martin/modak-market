@@ -5,7 +5,20 @@ import Home from "@/screens/home";
 
 export default createNativeStackNavigator({
   screens: {
-    Home,
-    Detail,
+    Home: {
+      screen: Home,
+    },
+    Detail: {
+      screen: Detail,
+      options: {
+        headerTitle: "",
+      },
+    },
+  },
+  screenOptions: {
+    headerShadowVisible: false,
+    headerBackButtonDisplayMode: "minimal",
+    headerBackButtonMenuEnabled: false,
+    headerTitleAlign: "center",
   },
 });
