@@ -29,10 +29,9 @@ export default function ProductList(props: Props) {
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create({
   root: {
     padding: SCREEN_PADDING,
     gap: SCREEN_PADDING,
-    backgroundColor: theme.colors.background,
   },
-}));
+});
