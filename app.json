@@ -15,7 +15,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mgmaldo.modakmarket"
+      "bundleIdentifier": "com.mgmaldo.modakmarket",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -24,6 +27,15 @@
       },
       "package": "com.mgmaldo.modakmarket"
     },
-    "plugins": [["react-native-edge-to-edge"]]
+    "plugins": [
+      [
+        "react-native-edge-to-edge"
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "55220689-0454-4942-a0a8-c4840684fdd7"
+      }
+    }
   }
 }
